@@ -12,7 +12,11 @@ class ProdutoRoute {
     //Rota para buscar produtos por setores  
     app.route('/produtos/setor')
       .post(ProdutoController.buscarProdutosPorSetor)
-    // .put(ProdutoController.atualizarQuantidade)
+
+    //Rota para atualizar quantidade de produtos no estoque  
+    app.route("/produtos/estoqueatualizado")
+      .put(ProdutoController.atualizarQuantidade)
+
 
   }
 

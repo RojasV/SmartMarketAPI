@@ -49,31 +49,33 @@ class ProdutoController {
     }
   }
 
-  // static async atualizarQuantidade(req, res) {
-  //   try {
-  //     let Venda = req.body
-  //     let produtoEstoque = await Produto.find({}).populate('setor', 'name ativo').exec()
+  static async atualizarQuantidade(req, res) {
+    try {
+      let venda = req.body
+      let produtoEstoque = await Produto.find({}).populate('setor', 'name ativo').exec()
 
-  //     let produtoVenda = await Produto.findById(Venda._id, Venda)
+      let produtoVenda = await Produto.find({
+        _id: venda
+      })
 
-  //     for (let index = 0; index < produtoEstoque.length; index++) {
+      for (let index = 0; index < produtoEstoque.length; index++) {
 
-  //       if (produtoEstoque[index] == produtoVenda) {
+        if (produtoEstoque[index]._id == produtoVenda) {
 
-  //         let estoqueAtualizado = (produtoEstoque[index].quantidade - produtoVenda.quantidade)
-  //         produtoEstoque[index].quantidade = estoqueAtualizado
+          let estoqueAtualizado = (produtoEstoque[index].quantidade - produtoVenda.quantidade)
+          produtoEstoque[index].quantidade = estoqueAtualizado
 
-  //         res.json(await Produto.findByIdAndUpdate(produtoEstoque[i]._id, produtoEstoque))
-  //       }
-  //     }
-
-
-  //   } catch (error) {
-  //     res.status(500).send(`Erro ao atualizar quantidade de produtos: ${error}`)
-  //   }
+          res.json(await Produto.findByIdAndUpdate(produtoEstoque[i]._id, produtoEstoque))
+        }
+      }
 
 
-  // }
+    } catch (error) {
+      res.status(500).send(`Erro ao atualizar quantidade de produtos: ${error}`)
+    }
+
+
+  }
 
 }
 
